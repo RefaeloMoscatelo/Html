@@ -1,0 +1,69 @@
+﻿@Model   WebApplication3.Models.FileData[]
+ 
+@{
+   
+}
+
+@functions{
+    string [] colors = WebApplication3.Code.Helper.GetColors().Select(x => x.Name).ToArray();
+    Random rnd = new Random();
+    Dictionary<string, string> colorsCollection = new Dictionary<string, string>();
+
+    string getRandomColor()
+    {
+        var randomIndex = rnd.Next(0, colors.Length);
+
+        return colors[randomIndex];
+
+    }
+
+    string GetcolorByExtension(string extension)
+    {
+        if (!colorsCollection.ContainsKey(extension))
+        {
+            colorsCollection.Add(extension, getRandomColor());
+        }
+        return colorsCollection[extension];
+    }
+
+    string SizeFormat(long size)
+    {
+        return string.Format("{0:###,###} KB", size / 1024);
+    }
+
+}
+
+<h2>Files</h2>
+
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Extension</th>
+            <th>Size</th>
+            <th>Modified</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr style="background-color:@GetcolorByExtension(item.Extension)">
+            <td>@item.FileName</td>
+            <td>@item.Extension</td>
+            <td>@SizeFormat(item.Size)</td>
+            <td>@item.ModifiedOn.ToString("yyyy/MM/dd")</td>
+        </tr>
+        }
+
+    </tbody>
+</table>
+@section scripts
+{
+<script>
+    //$(document).ready(function () {
+    //    alert("hello");
+    //});
+
+</script>
+ }

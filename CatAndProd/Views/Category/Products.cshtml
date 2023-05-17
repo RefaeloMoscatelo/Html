@@ -1,0 +1,67 @@
+﻿@using CatAndProd.BL
+
+
+@model CatAndProd.Models.ProductsBycategoryVM
+
+<h2>Products @Model.category.CategoryName</h2>
+
+
+<table>
+    <thead>
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Price
+            </th>
+            <th>
+                Quantity per unit
+            </th>
+            <th>
+                Units in stock
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Products)
+        {
+            <tr>
+                <td>
+                    @item.ProductName
+                </td>
+                <td>
+                    @item.UnitPrice
+                </td>
+                <td>
+                    @item.QuantityPerUnit
+                </td>
+                <td>
+                    @item.UnitsInStock
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<ol id="paging">
+    @for (int i = 1; i <= Model.TotalPagesCount; i++)
+    {
+    <li>
+        @if (i == Model.CurrentPage)
+        {
+        <span>@i&nbsp;&nbsp;</span>
+        }
+        else
+        {
+    <a href="Products?ID=@Model.category.CategoryID&page=@i">@i&nbsp;&nbsp;</a>
+        <br />
+
+        }
+    </li>
+    }
+</ol>
+<p> Total price:  @Model.TotalPrice</p>
+
+<p> Average price:  @Model.AvgPrice</p>
+
+<a href="/Category/GetCategories">Categories</a>

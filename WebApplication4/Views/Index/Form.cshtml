@@ -1,0 +1,31 @@
+﻿
+@{
+    ViewBag.Title = "Form";
+}
+
+<h2>Form</h2>
+
+
+<form method="get" action="/Index/Function">
+    <label>x</label>
+    <input type="text" name="x" value=" " />
+
+    <label>y</label>
+    <input type="text" name="y" value=" " />
+
+    <input type="submit" value="send" />
+    <br />
+    <input name="hobbies" type="checkbox" value="C#" />C# <br />
+    <input name="hobbies" type="checkbox" value="Java" />Java<br />
+    <input name="hobbies" type="checkbox" value="Go" />Go<br />
+
+</form>
+
+
+@for (int i = 1; i < 10; i++)
+{
+    for (int j = 1; j < 20; j++)
+    {
+       <a href="/Index/Function?x=@i&y=@j">@i*@j</a><br />
+    }
+}

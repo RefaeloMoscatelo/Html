@@ -1,0 +1,13 @@
+﻿@model IEnumerable<CatAndProd.BL.Category>
+
+
+
+
+<h2>GetCategories: (@Model.Count())</h2>
+
+<ol>
+    @foreach (var item in Model)
+    {
+        <li><a href="/Category/Products?ID=@item.CategoryID">@item.CategoryName</a>    </li>
+    }
+</ol>
